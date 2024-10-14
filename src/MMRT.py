@@ -87,7 +87,8 @@ class MMRT:
         if random_seed is not None:
             torch.manual_seed(random_seed)
             
-        self.optimizer.lr = learning_rate
+        for pg in self.optimizer.param_groups:
+            pg["lr"] = learning_rate
         
         with tqdm(range(epochs)) as pbar:
             for epoch in pbar:
